@@ -33,6 +33,7 @@ void ASkyBoxActor::GenerateSphere(int verticalSlices, int horizontalSlices)
 	float angle = 0.0f;
 	float sinAngle;
 	float cosAngle;
+	FMath::SinCos(&sinAngle, &cosAngle, angle);
 	
 	float stepSizeVertical = 180.0f / verticalSlices;
 	float stepSizeHorizontal = 360.0f / horizontalSlices;
@@ -48,6 +49,11 @@ void ASkyBoxActor::GenerateSphere(int verticalSlices, int horizontalSlices)
 			FMath::SinCos(&X, &Y, FMath::DegreesToRadians(hangle));
 			Vertices.Add(FVector(X* radiusMultiplierAtHeight, Y* radiusMultiplierAtHeight, height)*R);
 			UE_LOG(LogTemp, Warning, TEXT("Added vertex %d: %s"), Vertices.Num() - 1, *Vertices.Last(0).ToString());
+			
+			float s = FMath::GetMappedRangeValueClamped(TRange<float>(0.0, 360.0), TRange<float>(0.0, 1.0), hangle); 
+			float t = FMath::GetMappedRangeValueClamped(TRange<float>(90.0, -90.0), TRange<float>(1.0, 0.0), vangle);
+
+			TexCoords.Add(FVector2D(s, t));
 		}
 	}
 	for (int v = 1; v <= verticalSlices; v++)

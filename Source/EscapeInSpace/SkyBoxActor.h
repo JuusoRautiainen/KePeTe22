@@ -8,7 +8,7 @@
 #include "SkyBoxActor.generated.h"
 
 const int MIN_VERTICAL_SLICES = 4;
-const int MIN_HORIZONTAL_SLICES = 2;
+const int MIN_HORIZONTAL_SLICES = 4;
 
 UCLASS()
 class ESCAPEINSPACE_API ASkyBoxActor : public AActor
