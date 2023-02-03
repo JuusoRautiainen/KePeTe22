@@ -22,7 +22,8 @@ void ATerminalActor::BeginPlay()
 		UE_LOG(LogTemp, Error, TEXT("Screen texture resolution is not set in Terminal!"));
 		return;
 	}
-	ScreenTexture = UCanvasRenderTarget2D::CreateCanvasRenderTarget2D(GetWorld(), UCanvasRenderTarget2D::StaticClass(), ScreenTextureResolution.X, ScreenTextureResolution.Y);
+	ScreenTexture = UCanvasRenderTarget2D::CreateCanvasRenderTarget2D(GetWorld(), UCanvasRenderTarget2D::StaticClass(), 
+		ScreenTextureResolution.X, ScreenTextureResolution.Y);
 	ScreenTexture->OnCanvasRenderTargetUpdate.AddDynamic(this, &ATerminalActor::RenderScreen);
 	ScreenTexture->ClearColor = ClearColor;
 
